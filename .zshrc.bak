@@ -1,0 +1,110 @@
+# My THINGS
+
+export HISTCONTROL=ignoreboth:erasedups   # Ignore spaces and duplicates entries, clean duplicates
+export TERM="xterm-256color"              # getting a proper color
+# export EDITOR="nvim"                    # $EDITOR use nvim in terminal
+
+
+
+# Set editor default to terminhal
+# TODO:
+# If sentence that check if Nvim is instaled and set a default editor else mantain VI as a Editor.
+
+#   if [[ -n $SSH_CONNECTION ]]; then
+#       export EDITOR='vim'
+#   else
+#       export EDITOR='nvim'
+#   fi
+
+# Bat Options
+
+export BAT_THEME="OneHalfDark"        # Define theme
+
+# Set man pages with Bat
+
+# export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+# export MANPAGER="bat -p -l man"
+
+# Set nvim to manpages
+
+export MANPAGER="nvim +Man!"
+
+# FZF - Fuzzy Finder
+#
+alias fzf=fzf --preview 'bat --color=always {}'
+
+
+# EZA
+#
+# general use
+# alias ls='eza'                                                            # ls
+alias ls='eza -l --color=always --icons=auto --group-directories-first'
+# alias ls='eza -lbF --git --color-scale'                                      # list, size, type, git
+alias ll='eza -lbGF --git'                                                  # long list
+alias llm='eza -lbGd --git --sort=modified'                                 # long list, modified date sort
+alias la='eza -la --icons'
+alias la='eza -lbhHigUmuSa --time-style=long-iso --git --color-scale'       # all list
+alias lx='eza -lbhHigUmuSa@ --time-style=long-iso --git --color-scale'      # all + extended list
+
+# specialty views
+alias lS='eza -1'                                                       # one column, just names
+alias lt='eza -T --level=2'                                             # tree
+
+# Idea
+alias lm='eza -lr --sort=modified'                                          #list last modify first
+#eza -lhgma --git --color-scale
+
+
+
+# Add  Coreutils (MacOS) to PATH
+#
+export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
+
+
+## ZSH CONFIG
+
+## Initialize completion
+autoload -Uz compinit; compinit                                         # Option: - U -> mark the function compinit for autoloading and suppress alias expansion. | -z -> The -z means use zsh (rather than ksh) style.
+
+## dotfiles in completion options
+_comp_options+=(globdots)
+
+## case insensitive path-completion
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
+## Color menu <Tab> change options
+## Colors for files and directory
+zstyle ':completion:*' menu select
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+
+# Autocomplete options for cd instead of directory stack
+# zstyle ':completion:*' file-sort modification
+
+
+
+# Only display some tags for the command cd
+# zstyle ':completion:*:*:cd:*' tag-order local-directories directory-stack path-directories
+# # zstyle ':completion:*:complete:git:argument-1:' tag-order !aliases
+#
+# # Required for completion to be in good groups (named after the tags)
+# zstyle ':completion:*' group-name ''
+#
+# zstyle ':completion:*:*:-command-:*:*' group-order aliases builtins functions commands
+#
+# # See ZSHCOMPWID "completion matching control"
+# zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+#
+# zstyle ':completion:*' keep-prefix true
+#
+# zstyle -e ':completion:*:(ssh|scp|sftp|rsh|rsync):hosts' hosts 'reply=(${=${${(f)"$(cat {/etc/ssh_,~/.ssh/known_}hosts(|2)(N) /dev/null)"}%%[# ]*}//,/ })'
+
+
+# Set Zsh plugins
+
+source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+source /usr/local/opt/zsh-fast-syntax-highlighting/share/zsh-fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
+source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+# source /usr/local/share/zsh-autocomplete/zsh-autocomplete.plugin.zsh
+
+# Set Starship
+
+eval "$(starship init zsh)"
