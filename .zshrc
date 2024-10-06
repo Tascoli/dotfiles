@@ -24,13 +24,12 @@ check_if_install neofetch
 
 ## Pode ser colocada no arquivo '$HOME/.zshenv
 
-
 ## Where user-specific configurations should be written (analogous to /etc).Should default to $HOME/.config.
 export XDG_CONFIG_HOME="$HOME/.config"
 # Where user-specific data files should be written (analogous to /usr/share). Should default to $HOME/.local/share.
 export XDG_DATA_HOME="$XDG_CONFIG_HOME/.local/share"
 # Where user-specific non-essential (cached) data should be written (analogous to /var/cache).Should default to $HOME/.cache.
-export XDG_CACHE_HOME="$XDG_CONFIG_HOME/.cache"
+export  XDG_CACHE_HOME="$XDG_CONFIG_HOME/.cache"
 
 
 # History settings
@@ -46,35 +45,40 @@ setopt HIST_IGNORE_SPACE         # Do not record an event starting with a space.
 setopt HIST_SAVE_NO_DUPS         # Do not write a duplicate event to the history file.
 setopt HIST_VERIFY               # Do not execute immediately upon history expansion.
 
-# export HISTCONTROL=ignoreboth:erasedups   # Ignore spaces and duplicates entries, clean duplicates
 
+# Define preferred tools TODO: Set term and others envoirament variebles
 
-# TODO: Set term and others envoirament variebles
 export TERM="xterm-256color"              # getting a proper color
-# export EDITOR="nvim"                    # $EDITOR use nvim in terminal
+export EDITOR="nvim"                    # $EDITOR use nvim in terminal
 
-# Have less display colours
+#---------------------------------
+# LESS as MANPAGER with colours
+#---------------------------------
 
-export LESS_TERMCAP_mb=$'\e[1;31m'     # begin bold
-export LESS_TERMCAP_md=$'\e[1;33m'     # begin blink
-export LESS_TERMCAP_so=$'\e[01;44;37m' # begin reverse video
-export LESS_TERMCAP_us=$'\e[01;37m'    # begin underline
-export LESS_TERMCAP_me=$'\e[0m'        # reset bold/blink
-export LESS_TERMCAP_se=$'\e[0m'        # reset reverse video
-export LESS_TERMCAP_ue=$'\e[0m'        # reset underline
-export GROFF_NO_SGR=1                  # for konsole and gnome-terminal
+# export MANPAGER='less -s -M +Gg'
 
-# Set LESS as MANPAGER
-export MANPAGER='less -s -M +Gg'
+## Have less display colours
+#
+# export LESS_TERMCAP_mb=$'\e[1;31m'     # begin bold
+# export LESS_TERMCAP_md=$'\e[1;33m'     # begin blink
+# export LESS_TERMCAP_so=$'\e[01;44;37m' # begin reverse video
+# export LESS_TERMCAP_us=$'\e[01;37m'    # begin underline
+# export LESS_TERMCAP_me=$'\e[0m'        # reset bold/blink
+# export LESS_TERMCAP_se=$'\e[0m'        # reset reverse video
+# export LESS_TERMCAP_ue=$'\e[0m'        # reset underline
+# export GROFF_NO_SGR=1                  # for konsole and gnome-terminal
 
-# define preferred tools
-export EDITOR=vim
-export PAGER=less
+#---------------------------------
+# BAT as MANPAGER
+#---------------------------------
+export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+export MANROFFOPT="-c"
+# export MANPAGER="sh -c 'col -bx | bat --theme=default -l man -Len -p'"
+# man 2 select
 
-# TODO: Review config auto complete and delete desnecesary things
-
-## ZSH AUTO COMPLETE CONFIG
-
+#---------------------------------
+## ZSH AUTO COMPLETE CONFIG        TODO: Review config auto complete and delete desnecesary things
+#---------------------------------
 
 ## Initialize completion
 autoload -Uz compinit; compinit                               # Option: - U -> mark the function compinit for autoloading and suppress alias expansion. | -z -> The -z means use zsh (rather than ksh) style.
@@ -93,7 +97,6 @@ zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 # Autocomplete options for cd instead of directory stack
 # zstyle ':completion:*' file-sort modification
 
-
 # Only display some tags for the command cd
 # zstyle ':completion:*:*:cd:*' tag-order local-directories directory-stack path-directories
 # zstyle ':completion:*:complete:git:argument-1:' tag-order !aliases
@@ -106,9 +109,9 @@ zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 # zstyle ':completion:*' keep-prefix true
 # zstyle -e ':completion:*:(ssh|scp|sftp|rsh|rsync):hosts' hosts 'reply=(${=${${(f)"$(cat {/etc/ssh_,~/.ssh/known_}hosts(|2)(N) /dev/null)"}%%[# ]*}//,/ })'
 
-#-----------------------------------------
-
+#---------------------
 # Set Zsh plugins
+#---------------------
 
 source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /usr/local/opt/zsh-fast-syntax-highlighting/share/zsh-fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
@@ -123,16 +126,20 @@ source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # /_/   \_\_____|___/_/   \_\____/|_____|____/  #
 #
 #
+
+
+
+#------
 # EZA
+#------
 
 # general use
 
-alias ls='eza -l --color=always --icons=auto --group-directories-first'             # ls
-# alias ls='eza -lbF --git --color-scale'                                             # list, size, type, git
-alias ll='eza -lbGF --git'                                                          # long list
+alias ls='eza -lF --color=always --icons=auto --group-directories-first'             # ls
+alias ll='eza -lbGF --git --sort=modified'                                           # long list
 alias llm='eza -lbGd --git --sort=modified'                                         # long list, modified date sort
-alias la='eza -la --icons'
-alias la='eza -lbhHigUmuSa --time-style=long-iso --git --color-scale'               # all list
+alias la='eza -lha --icons'
+alias lad='eza -lhar --icons --sort=modified --group-directories-first'             # long, all, directories first, modify first
 alias lx='eza -lbhHigUmuSa@ --time-style=long-iso --git --color-scale'              # all + extended list
 alias lx=' eza -lbhgmSa --time-style=relative --git --color-scale --no-filesize'    # all + extended list
 alias lg='eza -lbF --color-scale --git --git-repos'
@@ -142,17 +149,38 @@ alias lS='eza -1'                                                               
 alias lt='eza -T --level=2'                                                         # tree
 
 # Idea
-alias lm='eza -lr --sort=modified'                                          #list last modify first
+alias lm='eza -lr --sort=modified'                                                  #list last modify first
+alias lla='eza -lhHgUma --time-style=long-iso --git --color-scale'                  # all list
 #eza -lhgma --git --color-scale
 
-note() {
-    echo "date: $(date)" >> $HOME/drafts.txt
-    echo "$@" >> $HOME/drafts.txt
-    echo "" >> $HOME/drafts.txt
-}
 
+#-----------
+# IDEAS:      TODO: Review
+#-----------
+
+# source_if_exists () {
+# if test -r "$1"; then
+#         source "$1"
+#     fi
+# }
+#
+# source_if_exists $HOME/.env.sh
+# source_if_exists $DOTFILES/zsh/history.zsh
+# source_if_exists $DOTFILES/zsh/git.zsh
+# source_if_exists ~/.fzf.zsh
+# source_if_exists $DOTFILES/zsh/aliases.zsh
+# # source_if_exists $HOME/.asdf/asdf.sh
+# source_if_exists /usr/local/etc/profile.d/z.sh
+# source_if_exists /opt/homebrew/etc/profile.d/z.sh
+
+# note() {
+#     echo "date: $(date)" >> $HOME/drafts.txt
+#     echo "$@" >> $HOME/drafts.txt
+#     echo "" >> $HOME/drafts.txt
+# }
+#
 # Start with neofetch
-
+#
 # Add CARGO  to your PATH to be able to run the installed binaries
 export PATH=~/.cargo/bin/:$PATH
 
