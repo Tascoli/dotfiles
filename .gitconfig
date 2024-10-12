@@ -1,0 +1,38 @@
+[user]
+	name = Tadeu Ascoli
+	email = tascoli@gmail.com
+[core]
+	editor = nvim
+[alias]
+    aliases = config --get-regexp alias
+	ci = commit
+	st = status
+	co = checkout
+	br = branch
+	hist = log -n 15 --graph --oneline --decorate
+	hista = log --graph --oneline --decorate
+
+[color]
+
+	# Use colors in Git commands that are capable of colored output when
+	# outputting to the terminal. (This is the default setting in Git ≥ 1.8.4.)
+    ui = auto
+
+[color "branch"]
+
+	current = green reverse #yellow reverse
+	local = green            #yellow
+	remote = red bold           #green
+
+[color "diff"]
+
+	meta = yellow bold
+	frag = magenta bold # line info
+	old = red # deletions
+	new = green # additions
+
+[color "status"]
+
+	added = green            #yellow
+	changed = yellow         #green
+	untracked = red          #cyan
