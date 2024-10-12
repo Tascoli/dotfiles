@@ -3,5 +3,8 @@
 .cache/
 cache/
 .local/
-.config/cabal/          # Packege manager, like cargo, to Haskell
+# Packege manager, like cargo, to Haskell
+.config/cabal/
+
 neofetch/
+.config/nvim
