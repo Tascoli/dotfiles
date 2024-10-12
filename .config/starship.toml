@@ -1,0 +1,79 @@
+# My settings
+# Inspires by https://gitlab.com/dwt1/dotfiles/-/blob/master/.config/starship.toml
+
+format = """
+$os$all
+"""
+
+[username]
+style_user = "green bold"
+style_root = "red bold"
+format = "[$user]($style) "
+disabled = true
+# show_always = true
+
+[hostname]
+ssh_only = false
+format = 'on [$hostname](bold purple) '
+trim_at = "."
+disabled = true
+
+# Replace the "❯" symbol in the prompt with "➜"
+[character]                                 # The name of the module we are configuring is "character"
+# success_symbol = "[➜](bold green)"        # The "success_symbol" segment is being set to "➜" with the color "bold green"
+error_symbol = "[✗](bold red)"
+# error_symbol = "[💥](bold red) "
+
+# Don't print a new line at the start of the prompt
+# add_newline = true
+
+# Make prompt a single line instead of two lines
+[line_break]
+disabled = true
+
+# Show symbol system
+[os]
+format = '[$symbol](bold white)'
+disabled = false
+
+# List of system symbols
+[os.symbols]
+Alpaquita = " "
+Alpine = " "
+Amazon = " "
+Android = " "
+Arch = " "
+Artix = " "
+CentOS = " "
+Debian = " "
+DragonFly = " "
+Emscripten = " "
+EndeavourOS = " "
+Fedora = " "
+FreeBSD = " "
+Garuda = "󰛓 "
+Gentoo = " "
+HardenedBSD = "󰞌 "
+Illumos = "󰈸 "
+Linux = " "
+Mabox = " "
+Macos = " "
+Manjaro = " "
+Mariner = " "
+MidnightBSD = " "
+Mint = " "
+NetBSD = " "
+NixOS = " "
+OpenBSD = "󰈺 "
+openSUSE = " "
+OracleLinux = "󰌷 "
+Pop = " "
+Raspbian = " "
+Redhat = " "
+RedHatEnterprise = " "
+Redox = "󰀘 "
+Solus = "󰠳 "
+SUSE = " "
+Ubuntu = " "
+Unknown = " "
+Windows = "󰍲 "
