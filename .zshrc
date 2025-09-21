@@ -12,7 +12,7 @@ check_if_install (){
     fi
 }
 
-check_if_install neofetch
+check_if_install fastfetch
 
 #-----------------------------#
 # EXPORT ENVIRONMENT VARIABLE #
