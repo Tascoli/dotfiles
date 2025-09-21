@@ -36,6 +36,11 @@ disabled = true
 format = '[$symbol](bold white)'
 disabled = false
 
+# Disable Node on Prompt
+[nodejs]
+disabled = true
+detect_files = ["package.json"]
+
 # List of system symbols
 [os.symbols]
 Alpaquita = " "
