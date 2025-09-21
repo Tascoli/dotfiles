@@ -5,7 +5,7 @@
 # This function help us to check if all dependencies is installed
 
 check_if_install (){
-    if command -v $1 > /dev/null; then
+    if command -v $1  > /dev/null; then
         $1
     else
        echo "The $1 isn't installed"
@@ -112,12 +112,18 @@ zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 #---------------------
 # Set Zsh plugins
 #---------------------
-
-source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-source /usr/local/opt/zsh-fast-syntax-highlighting/share/zsh-fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
-source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-# source /usr/local/share/zsh-autocomplete/zsh-autocomplete.plugin.zsh
-
+if ! which brew > /dev/null; then
+    source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+    source /usr/local/opt/zsh-fast-syntax-highlighting/share/zsh-fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
+    source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+    source /usr/local/share/zsh-autocomplete/zsh-autocomplete.plugin.zsh
+else
+    source /opt/homebrew/share/zsh/site-functions
+    source /opt/homebrew/share/zsh-autosuggestions
+    source /opt/homebrew/share/zsh-completions
+    source /opt/homebrew/share/zsh-fast-syntax-highlighting
+    source /opt/homebrew/share/zsh-syntax-highlighting
+fi
 
 #     _    _     ___    _    ____  _____ ____   #
 #    / \  | |   |_ _|  / \  / ___|| ____/ ___|  #
@@ -193,3 +199,4 @@ eval "$(starship init zsh)"
 
 #Inspired by
 # [Andrew Burgess](https://github.com/andrew8088/dotfiles)
+export PATH=~/.cargo/bin/:/Users/tascoli/.cargo/bin/:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:
