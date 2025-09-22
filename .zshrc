@@ -123,6 +123,8 @@ else
     source /opt/homebrew/share/zsh-completions
     source /opt/homebrew/share/zsh-fast-syntax-highlighting
     source /opt/homebrew/share/zsh-syntax-highlighting
+# -------GNUbin needed to be in PATH after intalation by Homebrew
+    export PATH="/opt/homebrew/opt/make/libexec/gnubin:$PATH"
 fi
 
 #     _    _     ___    _    ____  _____ ____   #
